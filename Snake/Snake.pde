@@ -1,29 +1,36 @@
+
 //Declare Vars
 Food food;
 float x, y, maxSnakeLength, size, keypressedRandom;
 String keypressed;
 boolean foodEaten, gameOver;
-int dx, dy;
+int dx, dy, score, spacing;
 void setup()
 {
   //Assign Some Vars
   gameOver = false;
   food = new Food();
   foodEaten = false;
-  keypressed = "UP";
+  keypressed = "DOWN";
   frameRate(15);
-  size(500, 500);
-  //fullScreen();
-  x = width/2;
-  y = height/2;
-  dy = 8;
-  dx = 8;
-  size = 10;
+  //size(500, 500);
+  fullScreen();
+  x = 0;
+  y = 0;
+  dy = 10;
+  dx = 10;
+  size = 15 ;
 }
 void draw()
 {
-  //Draw snake, food and background
+  isEaten();
+  println("snakex: "+ x + " snakey: " + y + " foodx: " + food.x + " foody: " + food.y);
+  //Draw snake, score, food and background
   background(0);
+  textSize(20);
+  fill(255);
+  textAlign(CENTER);
+  text("Score: " + score, width/2, 20);
   food.render();
   fill(0, 255, 0);
   rect(x, y, size, size);
@@ -51,11 +58,6 @@ void draw()
     gameOver = true;
     println("Game Over!");
   }
-  // calculate if foodpos is at snakepos
-  //if (food.x == x && food.y == y)
-  {
-    //println("Eaten Food");
-  }
 }
 void keyPressed()
   //Make snake keep moving even if key is not held
@@ -73,5 +75,18 @@ void keyPressed()
   } else if (keyCode == LEFT)
   {
     keypressed = "LEFT";
+  }
+}
+
+
+void isEaten()
+{
+  if(food.x == x && food.y == y || food.x <= x - 3 && food.y <= y - 3 || food.x <= x + 3 && food.x <= x - + 3)
+  {
+    while(food.Eaten == false){
+    println("Eaten");
+    score += 1;
+    food.Eaten = true;
+    }
   }
 }

@@ -1,17 +1,20 @@
+
 //Make food class
 class Food
 {
-  int num = 0;
   //Declare Vars
-  float size, x, y;
-  boolean shown;
+  float size;
+  int x,y;
+  boolean shown, Eaten;
   Food()
   {
     //Assign vars and location
-    x = random(width);
-    y = random(height);
-
-    size = 10;
+    Eaten = false;
+    dx = 8;
+    dy = 8;
+    x = ceil(random(width));
+    y = ceil(random(height));
+    size = 15;
     shown = true;
   }
   void render()
@@ -19,9 +22,11 @@ class Food
     //Draw the food
     if (shown == true);
     {
+      noStroke();
       fill(255, 0, 0);
+      pushMatrix();
       rect(x, y, size, size);
-      println(x % dx);
     }
+    popMatrix();
   }
 }

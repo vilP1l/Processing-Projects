@@ -1,5 +1,5 @@
 
-//Declare Vars
+//Declare Global Vars
 Food food;
 float x, y, maxSnakeLength, size, keypressedRandom;
 String keypressed;
@@ -7,14 +7,14 @@ boolean foodEaten, gameOver;
 int dx, dy, score, spacing;
 void setup()
 {
-  //Assign Some Vars
+  //Assign Some Vars and set screen size
   gameOver = false;
   food = new Food();
   foodEaten = false;
   keypressed = "DOWN";
   frameRate(15);
-  //size(500, 500);
-  fullScreen();
+  size(500, 500);
+  //fullScreen();
   x = 0;
   y = 0;
   dy = 10;
@@ -24,7 +24,8 @@ void setup()
 void draw()
 {
   isEaten();
-  println("snakex: "+ x + " snakey: " + y + " foodx: " + food.x + " foody: " + food.y);
+  //Debugging:
+  //println("snakex: "+ x + " snakey: " + y + " foodx: " + food.x + " foody: " + food.y);
   //Draw snake, score, food and background
   background(0);
   textSize(20);
@@ -78,15 +79,13 @@ void keyPressed()
   }
 }
 
-
+//Check if food is eaten by snake
 void isEaten()
 {
-  if(food.x == x && food.y == y || food.x <= x - 3 && food.y <= y - 3 || food.x <= x + 3 && food.x <= x - + 3)
+  float d = dist(x,y,food.x,food.y);
+  if(d < 13)
   {
-    while(food.Eaten == false){
-    println("Eaten");
     score += 1;
-    food.Eaten = true;
-    }
+    food.shown = false;
   }
 }

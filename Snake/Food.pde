@@ -20,13 +20,11 @@ class Food
   void render()
   {
     //Draw the food
-    if (shown == true);
+    if(shown == true)
     {
       noStroke();
       fill(255, 0, 0);
-      pushMatrix();
       rect(x, y, size, size);
     }
-    popMatrix();
   }
 }

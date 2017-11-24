@@ -27,4 +27,10 @@ class Food
       rect(x, y, size, size);
     }
   }
+  void reRender()
+  {
+    x = ceil(random(width));
+    y = ceil(random(height));
+    shown = true;
+  }
 }

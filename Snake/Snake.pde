@@ -87,5 +87,6 @@ void isEaten()
   {
     score += 1;
     food.shown = false;
+    food.reRender();
   }
 }

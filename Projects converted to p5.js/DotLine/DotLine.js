@@ -2,8 +2,8 @@ var num;
 var dot1;
 function setup()
 {
-  num = 100;
-  createCanvas(500,500);
+  num = 200;
+  createCanvas(screen.width,screen.height);
   background(0);
 }
 function draw()

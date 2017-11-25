@@ -4,8 +4,6 @@ class Dot
   Dot() {
     x = random(width);
     y = random(height);
-    x=400;
-    y=400;
   }
   void render()
   {
@@ -13,12 +11,13 @@ class Dot
    
   }
   void calc()
-  {if(x - mouseX > 100 || mouseX  - x > 100)
   {
-    stroke(255);
-    strokeWeight(5);
-   line(x, y, mouseX, mouseY);
-  
-  }
+    float d = dist(x,y,mouseX,mouseY);
+    if(d < 210)
+    {
+      stroke(255);
+      strokeWeight(2);
+      line(x,y,mouseX,mouseY);
+    }
   }
 }

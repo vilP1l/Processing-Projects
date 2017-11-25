@@ -5,4 +5,4 @@ Processing Projects Made in Processing 3
 **Mac Os**: https://goo.gl/ofzYaX
 **Outdated?** https://www.processing.org/download/
 # p5.js projects
-**DotLine - **https://goo.gl/65Tvf7
+**DotLine** - https://goo.gl/65Tvf7

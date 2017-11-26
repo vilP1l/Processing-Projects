@@ -33,7 +33,7 @@ function Dot()
     var d = dist(this.x,this.y,mouseX,mouseY);
     if(d < 100)
     {
-      stroke(255);
+      stroke(random(255),random(255),random(255));
       strokeWeight(2);
       line(this.x,this.y,mouseX,mouseY);
     }

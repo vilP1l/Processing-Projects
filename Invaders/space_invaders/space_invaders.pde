@@ -1,17 +1,19 @@
 //Vars and some classes
-int score, frameTime;
+int score, frameTime, alienNum;
 Ship ship;
 ArrayList<Bullet> bullets;
-float fireTime;
+float fireTime, alienfireTime;
 boolean firing;
+ArrayList<Alien> aliens;
 void setup()
 {
   size(800, 800, P3D);
   ship = new Ship();
   bullets = new ArrayList<Bullet>();
+  aliens = new ArrayList<Alien>();
 }
 void draw()
-{
+{  
   int now = millis();
   float elapsed = (now - frameTime) / 1000.0;
   frameTime = now;
@@ -39,6 +41,27 @@ void draw()
       fireTime = 0;
       Bullet b = new Bullet();
       bullets.add(b);
+    }
+  }
+  for (Alien bob : aliens)
+  {
+    bob.render();
+    bob.update();
+  }
+  boolean spawnAlien = true;
+  if (alienNum >= 9)
+  {
+    spawnAlien = false;
+  }
+  if (spawnAlien)
+  {
+    alienfireTime += elapsed;
+    if (alienfireTime >= 1) {
+      fireTime = 0;
+      Alien b = new Alien();
+      aliens.add(b);
+      alienNum += 1;
+      println(alienNum);
     }
   }
 }

@@ -53,17 +53,18 @@ void draw()
           {
             rock.active = false;
             bill.active = false;
+            spawnPieces(rock);
           }//End of distance calc
         }//End of instanceof i2
       }//End of Item i2 for
     }//End of i instanceof
   }//End of Item i for
-  
-  for(int n = 0; n < items.size(); n++)
+
+  for (int n = 0; n < items.size(); n++)
   {
     //Remove inactive things
     Item item = items.get(n);
-    if(!item.active) {
+    if (!item.active) {
       items.remove(n);
     }
   }
@@ -72,7 +73,18 @@ void draw()
     bill.render();
   }
 }
-
+void spawnPieces(Asteroid rock)
+{
+  if (rock.size < 20)
+  {
+    return;
+  }
+  int num = (int) random(2, 4);
+  for (int n = 0; n < num; n++)
+  {
+    Asteroid piece = new Asteroid(rock.x, rock.y, rock.size * 0.5);
+  }
+}
 void keyPressed()
 {
   switch(keyCode) { 

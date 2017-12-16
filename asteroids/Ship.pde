@@ -11,7 +11,7 @@ class Ship extends Item
   }
   void update(float elapsed)
   {
-    angle += rotation * TWO_PI * elapsed;
+    angle += rotation * PI * elapsed;
     if(thrusting){
       float yaccel = sin(angle);
       float xaccel = cos(angle);

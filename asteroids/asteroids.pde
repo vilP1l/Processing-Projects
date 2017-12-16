@@ -1,5 +1,4 @@
-ArrayList<Asteroid> rocks;
-ArrayList<Bullet> bullets;
+ArrayList<Item> items;
 int frameTime;
 boolean firingBullets = false;
 float fireTime;
@@ -9,12 +8,12 @@ void setup()
   size(800, 800, P2D);
   //fullScreen(P3D);
   ship = new Ship();
-  bullets = new ArrayList<Bullet>();
-  rocks = new ArrayList<Asteroid>();
+  items = new ArrayList<Item>();
   for (int n = 0; n < 4; n++) {
     Asteroid rock = new Asteroid();
-    rocks.add(rock);
+    items.add(rock);
   }
+  items.add(ship);
   frameTime = millis();
 }
 
@@ -25,16 +24,8 @@ void draw()
   int now = millis();
   float elapsed = (now - frameTime) / 1000.0;
   frameTime = now;
-  for ( int n = 0; n < rocks.size(); n++ ) {
-    Asteroid rock = rocks.get(n);
-    rock.update(elapsed);
-    rock.render();
-  }
-  ship.update(elapsed);
-  ship.render();
-  for (Bullet bill : bullets)
+  for (Item bill : items)
   {
-    bill.render();
     bill.update(elapsed);
   }
   if (firingBullets)
@@ -43,24 +34,45 @@ void draw()
     if (fireTime >= .2) {
       fireTime = 0;
       Bullet b = new Bullet(ship.x, ship.y, ship.angle);
-      bullets.add(b);
-    }
-    for (int n = 0; n < bullets.size(); n++)
-    {
-      Bullet bill = bullets.get(n);
-      for (int v = 0; v < rocks.size(); v++)
-      {
-        Asteroid rock = rocks.get(v);
-        float d = dist(bill.x,bill.y,rock.x,rock.y);
-        if(d < rock.size / 2)
-        {
-          rocks.remove(v);
-          bullets.remove(n);
-        }
-      }
+      items.add(b);
     }
   }
+  for (Item i : items)
+  {
+    if (i instanceof Bullet)
+    {
+      Bullet bill = (Bullet) i;
+
+      for (Item i2 : items)
+      {
+        if (i2 instanceof Asteroid)
+        {
+          Asteroid rock = (Asteroid) i2;
+          float d = dist(bill.x, bill.y, rock.x, rock.y);
+          if (d < rock.size / 2)
+          {
+            rock.active = false;
+            bill.active = false;
+          }//End of distance calc
+        }//End of instanceof i2
+      }//End of Item i2 for
+    }//End of i instanceof
+  }//End of Item i for
+  
+  for(int n = 0; n < items.size(); n++)
+  {
+    //Remove inactive things
+    Item item = items.get(n);
+    if(!item.active) {
+      items.remove(n);
+    }
+  }
+  for (Item bill : items)
+  {
+    bill.render();
+  }
 }
+
 void keyPressed()
 {
   switch(keyCode) { 
